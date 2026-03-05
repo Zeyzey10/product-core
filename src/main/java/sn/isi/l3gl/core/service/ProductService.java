@@ -14,13 +14,21 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    // v0.0.1-SNAPSHOT
+    // v0.0.1
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
 
-    // v0.1.0-SNAPSHOT
+    // v0.1.0
     public List<Product> listProducts() {
         return productRepository.findAll();
+    }
+
+    // v0.2.0
+    public Product updateQuantity(Long id, Integer newQuantity) {
+        Product product = productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Product not found: " + id));
+        product.setQuantity(newQuantity);
+        return productRepository.save(product);
     }
 }
